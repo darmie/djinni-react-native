@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "JavascriptMapKeyIterator.hpp"
 #include "djinni_support.hpp"
+#include "javascript_map_key_iterator.hpp"
 
 namespace djinni_generated {
 

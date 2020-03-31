@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "ReactBridge.hpp"
 #include "djinni_support.hpp"
+#include "react_bridge.hpp"
 
 namespace djinni_generated {
 

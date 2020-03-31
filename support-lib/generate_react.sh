@@ -10,6 +10,11 @@ IDL_FILE=$ROOT/react.djinni
 YAML_OUT=$ROOT
 YAML_OUT_FILE=react.yaml
 
+rm -rf $CPP_OUTPUT_FOLDER
+rm -rf $JNI_OUTPUT_FOLDER
+rm -rf $OBJC_OUTPUT_FOLDER
+rm -rf $JAVA_OUTPUT_FOLDER 
+
 set -e
 
 $ROOT/../src/run \

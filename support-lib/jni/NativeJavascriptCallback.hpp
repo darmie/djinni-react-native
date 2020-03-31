@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "JavascriptCallback.hpp"
 #include "djinni_support.hpp"
+#include "javascript_callback.hpp"
 
 namespace djinni_generated {
 

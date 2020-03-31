@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "JavascriptPromise.hpp"
 #include "djinni_support.hpp"
+#include "javascript_promise.hpp"
 
 namespace djinni_generated {
 

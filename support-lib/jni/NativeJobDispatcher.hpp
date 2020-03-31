@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "JobDispatcher.hpp"
 #include "djinni_support.hpp"
+#include "job_dispatcher.hpp"
 
 namespace djinni_generated {
 

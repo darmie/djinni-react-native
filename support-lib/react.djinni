@@ -1,31 +1,31 @@
-Job = interface +c {
+job = interface +c {
   run();
 }
 
-JobQueue = interface +c {
-  poll(): Job;
+job_queue = interface +c {
+  poll(): job;
   interruptPoll();
 }
 
-JobDispatcher = interface +j +o {
+job_dispatcher = interface +j +o {
   start();
   quit();
 }
 
-ReactBridge = interface +j +o {
-  createMap(): JavascriptMap;
-  createArray(): JavascriptArray;
+react_bridge = interface +j +o {
+  createMap(): javascript_map;
+  createArray(): javascript_array;
 
-  copyMap(map: JavascriptMap): JavascriptMap;
-  copyArray(array: JavascriptArray): JavascriptArray;
+  copyMap(map: javascript_map): javascript_map;
+  copyArray(array: javascript_array): javascript_array;
 
-  emitEventWithMap(name: string, params: JavascriptMap);
-  emitEventWithArray(name: string, params: JavascriptArray);
+  emitEventWithMap(name: string, params: javascript_map);
+  emitEventWithArray(name: string, params: javascript_array);
 
-  createJobDispatcher(queue: JobQueue): JobDispatcher;
+  createJobDispatcher(queue: job_queue): job_dispatcher;
 }
 
-JavascriptType = enum {
+javascript_type = enum {
   NIL;
   BOOLEAN;
   NUMBER;
@@ -34,91 +34,91 @@ JavascriptType = enum {
   MAP;
 }
 
-JavascriptObject = interface +c {
-  getType(): JavascriptType;
+javascript_object = interface +c {
+  getType(): javascript_type;
   isNull(): bool;
-  static fromNull(): JavascriptObject;
+  static fromNull(): javascript_object;
   asBoolean(): bool;
-  static fromBoolean(value: bool): JavascriptObject;
+  static fromBoolean(value: bool): javascript_object;
   asDouble(): f64;
-  static fromDouble(value: f64): JavascriptObject;
+  static fromDouble(value: f64): javascript_object;
   asInt(): i32;
-  static fromInt(value: i32): JavascriptObject;
+  static fromInt(value: i32): javascript_object;
   asString(): string;
-  static fromString(value: string): JavascriptObject;
-  asArray(): JavascriptArray;
-  static fromArray(value: JavascriptArray): JavascriptObject;
-  asMap(): JavascriptMap;
-  static fromMap(value: JavascriptMap): JavascriptObject;
+  static fromString(value: string): javascript_object;
+  asArray(): javascript_array;
+  static fromArray(value: javascript_array): javascript_object;
+  asMap(): javascript_map;
+  static fromMap(value: javascript_map): javascript_object;
 }
 
-JavascriptMap = interface +j +o {
+javascript_map = interface +j +o {
   hasKey(name: string): bool;
   isNull(name: string): bool;
   getBoolean(name: string): bool;
   getDouble(name: string): f64;
   getInt(name: string): i32;
   getString(name: string): string;
-  getArray(name: string): JavascriptArray;
-  getMap(name: string): JavascriptMap;
-  getObject(name: string): JavascriptObject;
-  getType(name: string): JavascriptType;
-  keySetIterator(): JavascriptMapKeyIterator;
+  getArray(name: string): javascript_array;
+  getMap(name: string): javascript_map;
+  getObject(name: string): javascript_object;
+  getType(name: string): javascript_type;
+  keySetIterator(): javascript_map_key_iterator;
 
   putNull(key: string);
   putBoolean(key: string, value: bool);
   putDouble(key: string, value: f64);
   putInt(key: string, value: i32);
   putString(key: string, value: string);
-  putArray(key: string, value: JavascriptArray);
-  putMap(key: string, value: JavascriptMap);
-  putObject(key: string, value: JavascriptObject);
+  putArray(key: string, value: javascript_array);
+  putMap(key: string, value: javascript_map);
+  putObject(key: string, value: javascript_object);
 
-  merge(source: JavascriptMap);
+  merge(source: javascript_map);
 }
 
-JavascriptMapKeyIterator = interface +j +o {
+javascript_map_key_iterator = interface +j +o {
   hasNextKey(): bool;
   nextKey(): string;
 }
 
-JavascriptArray = interface +j +o {
+javascript_array = interface +j +o {
   size(): i32;
   isNull(index: i32): bool;
   getBoolean(index: i32): bool;
   getDouble(index: i32): f64;
   getInt(index: i32): i32;
   getString(index: i32): string;
-  getArray(index: i32): JavascriptArray;
-  getMap(index: i32): JavascriptMap;
-  getObject(index: i32): JavascriptObject;
-  getType(index: i32): JavascriptType;
+  getArray(index: i32): javascript_array;
+  getMap(index: i32): javascript_map;
+  getObject(index: i32): javascript_object;
+  getType(index: i32): javascript_type;
 
   pushNull();
   pushBoolean(value: bool);
   pushDouble(value: f64);
   pushInt(value: i32);
   pushString(value: string);
-  pushArray(array: JavascriptArray);
-  pushMap(map: JavascriptMap);
-  pushObject(object: JavascriptObject);
+  pushArray(array: javascript_array);
+  pushMap(map: javascript_map);
+  pushObject(object: javascript_object);
 
-  append(source: JavascriptArray);
+  append(source: javascript_array);
 }
 
-JavascriptCallback = interface +j +o {
-  invoke(args: list<JavascriptObject>);
-  invokeSingleArg(arg: JavascriptObject);
+javascript_callback = interface +j +o {
+  invoke(args: list<javascript_object>);
+  invokeSingleArg(arg: javascript_object);
 }
 
-JavascriptPromise = interface +j +o {
+javascript_promise = interface +j +o {
   resolveNull();
   resolveBoolean(value: bool);
   resolveDouble(value: f64);
   resolveInt(value: i32);
   resolveString(value: string);
-  resolveArray(value: JavascriptArray);
-  resolveMap(value: JavascriptMap);
-  resolveObject(value: JavascriptObject);
+  resolveArray(value: javascript_array);
+  resolveMap(value: javascript_map);
+  resolveObject(value: javascript_object);
   reject(code: string, message: string);
 }

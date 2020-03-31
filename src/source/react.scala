@@ -6,13 +6,13 @@ import djinni.syntax.Error
 
 package object react {
   val CONSTRUCTOR_NAME = "create"
-  private val TYPES_CLASS_NAME = "ReactBridge"
-  private val CALLBACK_CLASS_NAME = "JavascriptCallback"
-  private val PROMISE_CLASS_NAME = "JavascriptPromise"
+  private val TYPES_CLASS_NAME = "react_bridge"
+  private val CALLBACK_CLASS_NAME = "javascript_callback"
+  private val PROMISE_CLASS_NAME = "javascript_promise"
 
   def isConstructor(i: Interface, m: Method) = (i.ext.react && m.ident.name == CONSTRUCTOR_NAME)
 
-  val reactUtilityClasses = Seq(TYPES_CLASS_NAME, "JavascriptType", "JavascriptMapKeyIterator")
+  val reactUtilityClasses = Seq(TYPES_CLASS_NAME, "javascript_type", "javascript_map_key_iterator")
   val primitiveTypes = Seq("bool", "i32", "f64", "string")
   var allowedTypes: Seq[String] = null
   var reactTypes = Map[String, TypeDecl]()
@@ -90,27 +90,27 @@ package object react {
   }
 
   val javaParamTypeToReact = Map(
-    "JavascriptMap" -> "ReadableMap",
-    "JavascriptArray" -> "ReadableArray",
-    "JavascriptPromise" -> "Promise",
-    "JavascriptCallback" -> "Callback"
+    "javascript_map" -> "ReadableMap",
+    "javascript_array" -> "ReadableArray",
+    "javascript_promise" -> "Promise",
+    "javascript_callback" -> "Callback"
   )
 
   val objcParamTypeToReact = Map(
-    "JavascriptMap" -> "nullable NSDictionary *",
-    "JavascriptArray" -> "nullable NSArray *",
-    "JavascriptPromise" -> Map("resolver" -> "nonnull RCTPromiseResolveBlock", "rejecter" -> "nonnull RCTPromiseRejectBlock"),
-    "JavascriptCallback" -> "nonnull RCTResponseSenderBlock",
+    "javascript_map" -> "nullable NSDictionary *",
+    "javascript_array" -> "nullable NSArray *",
+    "javascript_promise" -> Map("resolver" -> "nonnull RCTPromiseResolveBlock", "rejecter" -> "nonnull RCTPromiseRejectBlock"),
+    "javascript_callback" -> "nonnull RCTResponseSenderBlock",
     // Fixes for primitves, f64 and bool are fine
     "i32" -> "int",
     "string" -> "nullable NSString *"
   )
 
   val objcParamReactWrapperCalls = Map(
-    "JavascriptMap" -> Left("wrapMap"),
-    "JavascriptArray" -> Left("wrapArray"),
-    "JavascriptPromise" -> Right("wrapPromiseWithResolver:resolver rejecter:rejecter"),
-    "JavascriptCallback" -> Left("wrapCallback")
+    "javascript_map" -> Left("wrapMap"),
+    "javascript_array" -> Left("wrapArray"),
+    "javascript_promise" -> Right("wrapPromiseWithResolver:resolver rejecter:rejecter"),
+    "javascript_callback" -> Left("wrapCallback")
   )
 
   def mapJavaParamType(typeRef: TypeRef, marshaller: JavaMarshal) = {

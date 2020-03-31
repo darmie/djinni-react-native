@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "JavascriptMap.hpp"
 #include "djinni_support.hpp"
+#include "javascript_map.hpp"
 
 namespace djinni_generated {
 

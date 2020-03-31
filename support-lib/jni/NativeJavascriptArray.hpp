@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "JavascriptArray.hpp"
 #include "djinni_support.hpp"
+#include "javascript_array.hpp"
 
 namespace djinni_generated {
 
